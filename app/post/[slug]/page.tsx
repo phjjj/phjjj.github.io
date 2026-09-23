@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!post) return { title: "게시글을 찾을 수 없어요" };
 
   const thumbnail = resolveThumbnail(post.image_url, post.content);
-  const url = `${SITE_URL}/post/${slug}`;
+  const url = `${SITE_URL}/post/${slug}/`;
 
   return {
     title: post.title,

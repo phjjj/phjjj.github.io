@@ -9,7 +9,7 @@ fi
 
 # BSD grep(macOS)은 -L로 파일을 출력해도 exit 1 → pipefail 회피
 expected=$( (grep -L '^published: false' posts/*.md || true) | wc -l | tr -d ' ')
-actual=$(ls out/post/*.html | wc -l | tr -d ' ')
+actual=$(ls out/post/*/index.html | wc -l | tr -d ' ')
 if [ "$expected" != "$actual" ]; then
   echo "FAIL: published 글 $expected개, 생성된 페이지 $actual개"
   exit 1
