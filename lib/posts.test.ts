@@ -43,3 +43,24 @@ test("누락 필드 기본값, 초안은 slug로도 조회 불가", () => {
 test("NFD slug도 NFC 파일과 매칭", () => {
   assert.equal(getPostBySlug("새 글".normalize("NFD"), dir)?.title, "New");
 });
+
+test("missing title 에러", () => {
+  const d = makeDir({
+    "bad.md": md({ excerpt: "e", created_at: "2025-01-01T00:00:00Z", published: true }, "body"),
+  });
+  assert.throws(() => getPosts(d), /bad\.md: title 누락/);
+});
+
+test("invalid created_at 에러", () => {
+  const d = makeDir({
+    "bad.md": md({ title: "T", created_at: "nope", published: true }, "body"),
+  });
+  assert.throws(() => getPosts(d), /bad\.md: created_at 누락 또는 잘못됨/);
+});
+
+test("unparsable YAML 에러", () => {
+  const d = makeDir({
+    "bad.md": "---\ntitle: [unclosed\n---\n\nx\n",
+  });
+  assert.throws(() => getPosts(d), /bad\.md/);
+});
