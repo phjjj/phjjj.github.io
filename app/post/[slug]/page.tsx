@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import Header from "@/components/Header";
+import ScrollToTop from "@/components/ScrollToTop";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
 import ScrollTopButton from "@/components/ScrollTopButton";
 import TableOfContents from "@/components/TableOfContents";
@@ -77,6 +78,7 @@ export default async function PostPage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen bg-cream text-muted pb-32">
+      <ScrollToTop />
       <Header />
       <TableOfContents content={post.content} />
 

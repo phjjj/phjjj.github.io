@@ -54,6 +54,14 @@ export function getPosts(dir: string = POSTS_DIR): Post[] {
     .sort((a, b) => b.created_at.localeCompare(a.created_at));
 }
 
+export type TagCounts = { total: number; tags: Record<string, number> };
+
+export function countTags(posts: Post[]): TagCounts {
+  const tags: Record<string, number> = {};
+  for (const p of posts) for (const t of p.tags) tags[t] = (tags[t] ?? 0) + 1;
+  return { total: posts.length, tags };
+}
+
 export function getPostBySlug(slug: string, dir: string = POSTS_DIR): Post | null {
   const target = slug.normalize("NFC");
   return getPosts(dir).find((p) => p.slug === target) ?? null;

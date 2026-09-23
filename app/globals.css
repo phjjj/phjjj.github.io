@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-cream: #faf7eb;
+  --color-cream: #f0f0e8;
   --color-crimson: #7f0019;
   --color-muted: #3d3d38;
   --color-subtle: #888880;
   --color-border: #cccccc;
-  --color-paper: #f4f1e1;
+  --color-paper: #e8e8e0;
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -22,7 +22,7 @@ html {
 }
 
 body {
-  background-color: #faf7eb;
+  background-color: #f0f0e8;
   color: #3d3d38;
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -31,7 +31,7 @@ body {
 
 ::selection {
   background-color: #7f0019;
-  color: #faf7eb;
+  color: #f0f0e8;
 }
 
 /* Paper noise texture overlay */

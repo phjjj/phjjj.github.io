@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { getPosts, getPostBySlug } from "./posts";
+import { getPosts, getPostBySlug, countTags } from "./posts";
 
 function makeDir(files: Record<string, string>): string {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "posts-"));
@@ -42,6 +42,14 @@ test("누락 필드 기본값, 초안은 slug로도 조회 불가", () => {
 
 test("NFD slug도 NFC 파일과 매칭", () => {
   assert.equal(getPostBySlug("새 글".normalize("NFD"), dir)?.title, "New");
+});
+
+test("countTags는 published 글 기준으로 태그 집계", () => {
+  const d = makeDir({
+    "a.md": md({ title: "A", tags: ["x", "y"], created_at: "2025-01-01T00:00:00Z" }, "a"),
+    "b.md": md({ title: "B", tags: ["x"], created_at: "2025-01-02T00:00:00Z" }, "b"),
+  });
+  assert.deepEqual(countTags(getPosts(d)), { total: 2, tags: { x: 2, y: 1 } });
 });
 
 test("missing title 에러", () => {
