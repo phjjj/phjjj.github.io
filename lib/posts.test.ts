@@ -52,6 +52,11 @@ test("countTags는 published 글 기준으로 태그 집계", () => {
   assert.deepEqual(countTags(getPosts(d)), { total: 2, tags: { x: 2, y: 1 } });
 });
 
+test("created_at은 날짜만 써도 됨 (YAML date)", () => {
+  const d = makeDir({ "a.md": "---\ntitle: T\ncreated_at: 2026-05-14\n---\n\nx\n" });
+  assert.equal(getPosts(d)[0].created_at, "2026-05-14T00:00:00.000Z");
+});
+
 test("missing title 에러", () => {
   const d = makeDir({
     "bad.md": md({ excerpt: "e", created_at: "2025-01-01T00:00:00Z", published: true }, "body"),
