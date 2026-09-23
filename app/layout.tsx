@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
 import "highlight.js/styles/github.css";
+import { SITE_URL } from "@/lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,10 +23,8 @@ const notoSansKR = Noto_Sans_KR({
   display: "swap",
 });
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://phj.dev";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(BASE_URL),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "PHJ.dev",
     template: "%s | PHJ.dev",
@@ -34,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "ko_KR",
-    url: BASE_URL,
+    url: SITE_URL,
     siteName: "PHJ.dev",
     title: "PHJ.dev",
     description: "생각과 코드 조각을 기록하는 공간",

@@ -39,7 +39,7 @@ export function getPosts(dir: string = POSTS_DIR): Post[] {
           excerpt: (data.excerpt as string) ?? "",
           content,
           image_url: (data.image_url as string) ?? "",
-          tags: (data.tags as unknown[]) ?? [],
+          tags: (data.tags as string[]) ?? [],
           created_at: date.toISOString(),
           published: data.published !== false,
         };

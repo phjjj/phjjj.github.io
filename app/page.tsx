@@ -1,14 +1,11 @@
 import Header from "@/components/Header";
 import PostListInfinite from "@/components/PostListInfinite";
-import { getPostsPage } from "@/utils/supabase";
+import { getPosts } from "@/lib/posts";
 import { Github } from "lucide-react";
 
-export const revalidate = 60;
-
-const PAGE_SIZE = 10;
-
-export default async function HomePage() {
-  const { posts: initialPosts, hasMore: initialHasMore } = await getPostsPage(PAGE_SIZE, 0);
+export default function HomePage() {
+  // 목록엔 본문 불필요 → content 제거해 HTML 페이로드 축소
+  const posts = getPosts().map((p) => ({ ...p, content: "" }));
 
   return (
     <div className="min-h-screen bg-cream text-muted pb-32">
@@ -39,7 +36,7 @@ export default async function HomePage() {
 
         {/* Post List - Infinite Scroll */}
         <section className="border-t">
-          <PostListInfinite initialPosts={initialPosts} initialHasMore={initialHasMore} />
+          <PostListInfinite posts={posts} />
         </section>
       </main>
     </div>

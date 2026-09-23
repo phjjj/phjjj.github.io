@@ -1,18 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-      },
-      {
-        protocol: "https",
-        hostname: "*.supabase.co",
-      },
-    ],
-  },
+  output: "export",
+  // ponytail: GitHub Pages엔 이미지 최적화 서버 없음. 원본 전송, 큰 이미지는 이전 시 압축
+  images: { unoptimized: true },
 };
 
 export default nextConfig;

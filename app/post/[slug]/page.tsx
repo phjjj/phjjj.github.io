@@ -6,11 +6,10 @@ import Header from "@/components/Header";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
 import ScrollTopButton from "@/components/ScrollTopButton";
 import TableOfContents from "@/components/TableOfContents";
-import { getPostBySlug, getPosts } from "@/utils/supabase";
+import { getPostBySlug, getPosts } from "@/lib/posts";
+import { SITE_URL } from "@/lib/site";
 import Image from "next/image";
 import { resolveThumbnail } from "@/lib/postUtils";
-
-export const revalidate = 60;
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -26,21 +25,18 @@ function slugFromParam(param: string): string {
 }
 
 export async function generateStaticParams() {
-  const posts = await getPosts();
   // 퍼센트 인코딩된 slug를 쓰면 정적 빌드 경로 길이가 수배로 늘어 ENAMETOOLONG이 납니다.
-  return posts.map((post) => ({ slug: post.slug }));
+  return getPosts().map((post) => ({ slug: post.slug }));
 }
-
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://phj.dev";
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getPostBySlug(slugFromParam(slug));
+  const post = getPostBySlug(slugFromParam(slug));
 
   if (!post) return { title: "게시글을 찾을 수 없어요" };
 
   const thumbnail = resolveThumbnail(post.image_url, post.content);
-  const url = `${BASE_URL}/post/${slug}`;
+  const url = `${SITE_URL}/post/${slug}`;
 
   return {
     title: post.title,
@@ -73,7 +69,7 @@ function formatDate(dateStr: string): string {
 
 export default async function PostPage({ params }: PageProps) {
   const { slug } = await params;
-  const post = await getPostBySlug(slugFromParam(slug));
+  const post = getPostBySlug(slugFromParam(slug));
 
   if (!post) notFound();
 

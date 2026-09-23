@@ -1,16 +1,11 @@
 import type { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/site";
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://phj.dev";
+export const dynamic = "force-static";
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: [
-      {
-        userAgent: "*",
-        allow: "/",
-        disallow: ["/admin", "/admin/"],
-      },
-    ],
-    sitemap: `${BASE_URL}/sitemap.xml`,
+    rules: [{ userAgent: "*", allow: "/" }],
+    sitemap: `${SITE_URL}/sitemap.xml`,
   };
 }
