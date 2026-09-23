@@ -1,15 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Post } from "@/types/post";
-import { resolveThumbnail } from "@/lib/postUtils";
+import { resolveThumbnail, formatDate } from "@/lib/postUtils";
 
 interface PostCardProps {
   post: Post;
-}
-
-function formatDate(dateStr: string): string {
-  const d = new Date(dateStr);
-  return `${d.getFullYear()}. ${String(d.getMonth() + 1).padStart(2, "0")}. ${String(d.getDate()).padStart(2, "0")}`;
 }
 
 export default function PostCard({ post }: PostCardProps) {

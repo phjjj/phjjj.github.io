@@ -3,15 +3,11 @@
 import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import PostCard from "./PostCard";
+import { formatDate } from "@/lib/postUtils";
 import type { Post } from "@/types/post";
 import type { TagCounts } from "@/lib/posts";
 
 const PAGE_SIZE = 10;
-
-function formatDate(dateStr: string): string {
-  const d = new Date(dateStr);
-  return `${d.getFullYear()}. ${String(d.getMonth() + 1).padStart(2, "0")}. ${String(d.getDate()).padStart(2, "0")}`;
-}
 
 interface Props {
   posts: Post[];

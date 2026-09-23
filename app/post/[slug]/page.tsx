@@ -10,7 +10,7 @@ import TableOfContents from "@/components/TableOfContents";
 import { getPostBySlug, getPosts } from "@/lib/posts";
 import { SITE_URL } from "@/lib/site";
 import Image from "next/image";
-import { resolveThumbnail } from "@/lib/postUtils";
+import { resolveThumbnail, formatDate } from "@/lib/postUtils";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -61,11 +61,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       images: thumbnail ? [thumbnail] : [],
     },
   };
-}
-
-function formatDate(dateStr: string): string {
-  const d = new Date(dateStr);
-  return `${d.getFullYear()}. ${String(d.getMonth() + 1).padStart(2, "0")}. ${String(d.getDate()).padStart(2, "0")}`;
 }
 
 export default async function PostPage({ params }: PageProps) {
