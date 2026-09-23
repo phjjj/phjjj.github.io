@@ -32,7 +32,3 @@ published: true
 ![n8n 활용 이미지](/images/january-retrospective/january-retrospective-curby.png)
 
 >앞으로 반복적인 업무 또는 내가 반복적으로 무언가를 하고 있다면 n8n 활용을 고려해보아도 좋을 듯 하다.
-
-## 이달의 음식
-흑백요리사에 나온 쉐프의 식당을 갔는데, 이 딤섬 맛있었다.
-![이미지](/images/january-retrospective/1771919327738-ovee1vrp7x.JPG)
