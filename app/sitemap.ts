@@ -6,7 +6,7 @@ export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const postEntries: MetadataRoute.Sitemap = getPosts().map((post) => ({
-    url: `${SITE_URL}/post/${post.slug}`,
+    url: `${SITE_URL}/post/${encodeURIComponent(post.slug)}`,
     lastModified: new Date(post.created_at),
     changeFrequency: "monthly",
     priority: 0.8,
